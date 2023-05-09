@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage
+    x:Class="QuanLyThuChi.Views.HomePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:QuanLyThuChi.Views"
+    xmlns:prism="http://prismlibrary.com"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BarBackgroundColor="#EAEAEA"
+    SelectedTabColor="#7EC1FF">
+    <NavigationPage Title="{StaticResource DanhSachThu}">
+        <x:Arguments>
+            <local:DanhSachThuPage />
+        </x:Arguments>
+    </NavigationPage>
+    <NavigationPage Title="{StaticResource DanhSachChi}">
+        <x:Arguments>
+            <local:DanhSachChiPage />
+        </x:Arguments>
+    </NavigationPage>
+</TabbedPage>

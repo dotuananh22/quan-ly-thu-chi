@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<prism:PrismApplication
+    x:Class="QuanLyThuChi.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:customs="clr-namespace:QuanLyThuChi.Customs"
+    xmlns:local="clr-namespace:QuanLyThuChi.Views"
+    xmlns:prism="http://prismlibrary.com">
+    <Application.Resources>
+
+        <ResourceDictionary>
+            <x:String x:Key="DanhSachThu">Danh sách thu</x:String>
+            <x:String x:Key="DanhSachChi">Danh sách chi</x:String>
+            <x:String x:Key="Home">Tổng quan</x:String>
+            <x:String x:Key="Search">Tìm kiếm</x:String>
+            <x:String x:Key="Add">Thêm</x:String>
+            <x:String x:Key="Chart">Thống kê</x:String>
+            <x:String x:Key="More">Khác</x:String>
+        </ResourceDictionary>
+
+    </Application.Resources>
+</prism:PrismApplication>
