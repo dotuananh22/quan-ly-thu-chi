@@ -7,7 +7,8 @@
     xmlns:prism="http://prismlibrary.com"
     prism:ViewModelLocator.AutowireViewModel="True"
     BarBackgroundColor="#EAEAEA"
-    SelectedTabColor="#7EC1FF">
+    SelectedTabColor="#7EC1FF"
+    UnselectedTabColor="Black">
     <NavigationPage Title="{StaticResource DanhSachThu}">
         <x:Arguments>
             <local:DanhSachThuPage />
