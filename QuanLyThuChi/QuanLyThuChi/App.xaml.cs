@@ -24,7 +24,7 @@ namespace QuanLyThuChi
             InitializeComponent();
 
             //Create database and init data
-            InitData();
+            //InitData();
 
             await NavigationService.NavigateAsync("NavigationPage/MainPage");
         }

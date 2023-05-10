@@ -9,6 +9,71 @@
     <Application.Resources>
 
         <ResourceDictionary>
+            <OnPlatform
+                x:Key="RobotoFontRegular"
+                x:TypeArguments="x:String"
+                Android="Roboto-Regular.ttf#Roboto-Regular" />
+            <OnPlatform
+                x:Key="RobotoFontBold"
+                x:TypeArguments="x:String"
+                Android="Roboto-Bold.ttf#Roboto-Bold" />
+            <OnPlatform
+                x:Key="RobotoFontBlack"
+                x:TypeArguments="x:String"
+                Android="Roboto-Black.ttf#Roboto-Black" />
+            <OnPlatform
+                x:Key="RobotoFontLight"
+                x:TypeArguments="x:String"
+                Android="Roboto-Light.ttf#Roboto-Light" />
+            <OnPlatform
+                x:Key="RobotoFontMedium"
+                x:TypeArguments="x:String"
+                Android="Roboto-Medium.ttf#Roboto-Medium" />
+            <OnPlatform
+                x:Key="RobotoFontThin"
+                x:TypeArguments="x:String"
+                Android="Roboto-Thin.ttf#Roboto-Thin" />
+
+            <Style TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource RobotoFontRegular}" />
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="FontFamily" Value="{StaticResource RobotoFontRegular}" />
+            </Style>
+            <Style TargetType="Entry">
+                <Setter Property="FontFamily" Value="{StaticResource RobotoFontRegular}" />
+                <Setter Property="FontSize"
+                        Value="Small" />
+                <Setter Property="VerticalTextAlignment"
+                        Value="End" />
+            </Style>
+            <Style TargetType="Editor">
+                <Setter Property="FontFamily" Value="{StaticResource RobotoFontRegular}" />
+                <Setter Property="FontSize"
+                        Value="Small" />
+                <Setter Property="VerticalOptions"
+                        Value="End" />
+                <Setter Property="HeightRequest"
+                        Value="70" />
+            </Style>
+            <Style TargetType="Picker">
+                <Setter Property="FontFamily" Value="{StaticResource RobotoFontRegular}" />
+                <Setter Property="FontSize"
+                        Value="Small" />
+                <Setter Property="VerticalTextAlignment"
+                        Value="End" />
+            </Style>
+            <Style TargetType="DatePicker">
+                <Setter Property="FontFamily" Value="{StaticResource RobotoFontRegular}" />
+                <Setter Property="FontSize"
+                        Value="Small" />
+                <Setter Property="VerticalOptions"
+                        Value="End" />
+            </Style>
+            <Style TargetType="TimePicker">
+                <Setter Property="FontFamily" Value="{StaticResource RobotoFontRegular}" />
+            </Style>
+
             <x:String x:Key="DanhSachThu">Danh sách thu</x:String>
             <x:String x:Key="DanhSachChi">Danh sách chi</x:String>
             <x:String x:Key="Home">Tổng quan</x:String>
@@ -17,16 +82,41 @@
             <x:String x:Key="Chart">Thống kê</x:String>
             <x:String x:Key="More">Khác</x:String>
 
+            <Style x:Key="HeaderLayoutStackLayout" TargetType="StackLayout">
+                <Setter Property="BackgroundColor" Value="#7EC1FF" />
+                <Setter Property="HeightRequest" Value="50" />
+            </Style>
+            <Style x:Key="HeaderLayoutLabel" TargetType="Label">
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontSize" Value="Body" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontFamily" Value="{StaticResource RobotoFontRegular}" />
+            </Style>
+
             <Style x:Key="DateFormat" TargetType="Label">
                 <Setter Property="FontSize" Value="Body" />
                 <Setter Property="VerticalOptions" Value="End" />
-                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="Black" />
                 <Setter Property="Margin" Value="5,0,0,0" />
+                <Setter Property="FontFamily" Value="{StaticResource RobotoFontRegular}" />
+            </Style>
+            <Style x:Key="MainTitleFormat" TargetType="Label">
+                <Setter Property="FontSize" Value="Small" />
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="Margin" Value="10,0,0,5" />
+                <Setter Property="VerticalOptions" Value="End" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="FontFamily" Value="{StaticResource RobotoFontRegular}" />
             </Style>
             <Style x:Key="TitleFormat" TargetType="Label">
                 <Setter Property="FontSize" Value="Small" />
                 <Setter Property="VerticalOptions" Value="Start" />
                 <Setter Property="Margin" Value="5,0,0,5" />
+                <Setter Property="FontFamily" Value="{StaticResource RobotoFontRegular}" />
             </Style>
             <Style x:Key="CostThuFormat" TargetType="Label">
                 <Setter Property="FontSize" Value="Small" />
@@ -35,6 +125,7 @@
                 <Setter Property="VerticalOptions" Value="Center" />
                 <Setter Property="HorizontalOptions" Value="End" />
                 <Setter Property="TextColor" Value="#169F00" />
+                <Setter Property="FontFamily" Value="{StaticResource RobotoFontBold}" />
             </Style>
             <Style x:Key="CostChiFormat" TargetType="Label">
                 <Setter Property="FontSize" Value="Small" />
@@ -43,12 +134,35 @@
                 <Setter Property="VerticalOptions" Value="Center" />
                 <Setter Property="HorizontalOptions" Value="End" />
                 <Setter Property="TextColor" Value="#B12B00" />
+                <Setter Property="FontFamily" Value="{StaticResource RobotoFontBold}" />
             </Style>
 
             <Style x:Key="Separator" TargetType="BoxView">
                 <Setter Property="Margin" Value="5,0" />
                 <Setter Property="HeightRequest" Value="1" />
                 <Setter Property="BackgroundColor" Value="#EAEAEA" />
+            </Style>
+            <Style x:Key="CancelButton" TargetType="Button">
+                <Setter Property="WidthRequest" Value="130" />
+                <Setter Property="HeightRequest" Value="40" />
+                <Setter Property="BackgroundColor" Value="#B12B00" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="FontSize" Value="Small" />
+                <Setter Property="CornerRadius" Value="15" />
+                <Setter Property="FontFamily" Value="{StaticResource RobotoFontBold}" />
+            </Style>
+            <Style x:Key="OKButton" TargetType="Button">
+                <Setter Property="WidthRequest" Value="130" />
+                <Setter Property="HeightRequest" Value="40" />
+                <Setter Property="BackgroundColor" Value="#7EC1FF" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="FontSize" Value="Small" />
+                <Setter Property="CornerRadius" Value="15" />
+                <Setter Property="FontFamily" Value="{StaticResource RobotoFontBold}" />
             </Style>
         </ResourceDictionary>
 

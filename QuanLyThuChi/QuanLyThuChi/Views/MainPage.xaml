@@ -5,9 +5,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:customs="clr-namespace:QuanLyThuChi.Customs"
     xmlns:local="clr-namespace:QuanLyThuChi.Views"
-    UnselectedTabColor="#808080"
     BarBackgroundColor="White"
-    SelectedTabColor="#7EC1FF">
+    SelectedTabColor="#7EC1FF"
+    UnselectedTabColor="#808080">
     <NavigationPage Title="{StaticResource Home}" IconImageSource="home.png">
         <x:Arguments>
             <local:HomePage />

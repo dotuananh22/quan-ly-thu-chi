@@ -54,6 +54,7 @@
             Orientation="Horizontal">
             <Label
                 FontAttributes="Bold"
+                FontFamily="RobotoFontBold"
                 FontSize="Small"
                 Text="Tổng cộng: "
                 TextColor="Black" />
