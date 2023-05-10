@@ -16,6 +16,7 @@
         <CollectionView
             Margin="5"
             ItemsSource="{Binding ListKhoanChi}"
+            SelectedItem="{Binding KhoanChi}"
             SelectionMode="Single">
             <CollectionView.ItemTemplate>
                 <DataTemplate>

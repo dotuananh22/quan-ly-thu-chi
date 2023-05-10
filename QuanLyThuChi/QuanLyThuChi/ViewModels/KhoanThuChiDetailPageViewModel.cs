@@ -70,9 +70,11 @@ namespace QuanLyThuChi.ViewModels
             HandleDelete();
         }
 
-        private void OnUpdateBtnCommand()
+        private async void OnUpdateBtnCommand()
         {
-            Debug.WriteLine("Update");
+            var p = new NavigationParameters();
+            p.Add("id", KhoanThu.Id);
+            await NavigationService.NavigateAsync("UpdatePage", p);
         }
 
         private async void HandleDelete()

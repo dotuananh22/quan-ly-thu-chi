@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <views:BasePage
-    x:Class="QuanLyThuChi.Views.AddPage"
+    x:Class="QuanLyThuChi.Views.UpdatePage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:prism="http://prismlibrary.com"
@@ -9,7 +9,7 @@
     BackgroundColor="#EAEAEA">
     <StackLayout Margin="0,0,0,5" BackgroundColor="White">
         <StackLayout Style="{StaticResource HeaderLayoutStackLayout}">
-            <Label Style="{StaticResource HeaderLayoutLabel}" Text="Thêm khoản thu/chi" />
+            <Label Style="{StaticResource HeaderLayoutLabel}" Text="Cập nhật thu/chi" />
         </StackLayout>
         <Grid Margin="5,20,10,0" VerticalOptions="StartAndExpand">
             <Grid.RowDefinitions>
@@ -76,9 +76,9 @@
                 Text="HỦY" />
             <Button
                 Grid.Column="1"
-                Command="{Binding OKBtnCommand}"
+                Command="{Binding UpdateBtnCommand}"
                 Style="{StaticResource OKButton}"
-                Text="THÊM" />
+                Text="CẬP NHẬT" />
         </Grid>
     </StackLayout>
 </views:BasePage>
