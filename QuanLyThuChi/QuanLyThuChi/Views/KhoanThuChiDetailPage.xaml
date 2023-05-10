@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BasePage
+    x:Class="QuanLyThuChi.Views.KhoanThuChiDetailPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="http://prismlibrary.com"
+    xmlns:views="clr-namespace:QuanLyThuChi.Views"
+    xmlns:cvt="clr-namespace:QuanLyThuChi.Converters"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="#EAEAEA">
+    <ContentPage.Resources>
+        <cvt:CostConverter x:Key="costConverter" />
+        <cvt:DateTimeToStringConverter x:Key="dateTimeToStringConverter" />
+    </ContentPage.Resources>
+    <StackLayout Margin="0,0,0,5" BackgroundColor="White">
+        <StackLayout Style="{StaticResource HeaderLayoutStackLayout}">
+            <Image Source="back.png" Style="{StaticResource BackImage}">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BackCommand}" />
+                </Image.GestureRecognizers>
+            </Image>
+        </StackLayout>
+        <Grid Margin="5,20,10,0" VerticalOptions="StartAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60" />
+                <RowDefinition Height="60" />
+                <RowDefinition Height="60" />
+                <RowDefinition Height="60" />
+                <RowDefinition Height="60" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Style="{StaticResource MainTitleFormat}" Text="Loại" />
+            <Label
+                Grid.Column="1"
+                Style="{StaticResource MainTitleFormat}"
+                Text="{Binding CategorySelected}" />
+            <Label
+                Grid.Row="1"
+                Style="{StaticResource MainTitleFormat}"
+                Text="Ngày" />
+            <Label
+                Grid.Row="1"
+                Grid.Column="1"
+                Style="{StaticResource MainTitleFormat}"
+                Text="{Binding Date, Converter={StaticResource dateTimeToStringConverter}}" />
+            <Label
+                Grid.Row="2"
+                Style="{StaticResource MainTitleFormat}"
+                Text="Tiêu đề" />
+            <Label
+                Grid.Row="2"
+                Grid.Column="1"
+                Style="{StaticResource MainTitleFormat}"
+                Text="{Binding MainTitle}" />
+            <Label
+                Grid.Row="3"
+                Style="{StaticResource MainTitleFormat}"
+                Text="Số tiền" />
+            <Label
+                Grid.Row="3"
+                Grid.Column="1"
+                Style="{StaticResource MainTitleFormat}"
+                Text="{Binding Cost, Converter={StaticResource costConverter}}" />
+            <Label
+                Grid.Row="4"
+                Style="{StaticResource MainTitleFormat}"
+                Text="Nội dung" />
+            <Label
+                Grid.Row="4"
+                Grid.Column="1"
+                Style="{StaticResource MainTitleFormat}"
+                Text="{Binding Comment}" />
+        </Grid>
+        <Grid Margin="0,0,0,30" VerticalOptions="EndAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Button
+                Command="{Binding DeleteBtnCommand}"
+                Style="{StaticResource CancelButton}"
+                Text="XÓA" />
+            <Button
+                Grid.Column="1"
+                Command="{Binding UpdateBtnCommand}"
+                Style="{StaticResource OKButton}"
+                Text="CẬP NHẬT" />
+        </Grid>
+    </StackLayout>
+</views:BasePage>

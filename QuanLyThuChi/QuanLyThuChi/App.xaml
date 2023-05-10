@@ -154,6 +154,11 @@
                 <Setter Property="CornerRadius" Value="15" />
                 <Setter Property="FontFamily" Value="{StaticResource RobotoFontBold}" />
             </Style>
+            <Style x:Key="BackImage" TargetType="Image">
+                <Setter Property="HeightRequest" Value="20" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="Margin" Value="10,15,0,0" />
+            </Style>
         </ResourceDictionary>
 
     </Application.Resources>

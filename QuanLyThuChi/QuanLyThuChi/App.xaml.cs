@@ -93,6 +93,7 @@ namespace QuanLyThuChi
             containerRegistry.RegisterForNavigation<MorePage, MorePageViewModel>();
             containerRegistry.RegisterForNavigation<DanhSachThuPage, DanhSachThuPageViewModel>();
             containerRegistry.RegisterForNavigation<DanhSachChiPage, DanhSachChiPageViewModel>();
+            containerRegistry.RegisterForNavigation<KhoanThuChiDetailPage, KhoanThuChiDetailPageViewModel>();
         }
     }
 }

@@ -6,6 +6,7 @@ using QuanLyThuChi.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 
@@ -20,6 +21,12 @@ namespace QuanLyThuChi.ViewModels
             get { return _totalCost; }
             set { SetProperty(ref _totalCost, value); }
         }
+        private KhoanThuChi _khoanThu;
+        public KhoanThuChi KhoanThu
+        {
+            get { return _khoanThu; }
+            set { SetProperty(ref _khoanThu, value); }
+        }
         private readonly Database database = new Database();
         private ObservableCollection<KhoanThuChi> _listKhoanThu;
         public ObservableCollection<KhoanThuChi> ListKhoanThu
@@ -33,6 +40,20 @@ namespace QuanLyThuChi.ViewModels
         {
             GetKhoanThu();
             Instance = this;
+            PropertyChanged += DanhSachThu_PropertyChanged;
+        }
+
+        private async void DanhSachThu_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "KhoanThu")
+            {
+                if (KhoanThu != null)
+                {
+                    var p = new NavigationParameters();
+                    p.Add("id", KhoanThu.Id);
+                    await NavigationService.NavigateAsync("KhoanThuChiDetailPage", p);
+                }
+            }
         }
 
         private void CalculateTotalCost()

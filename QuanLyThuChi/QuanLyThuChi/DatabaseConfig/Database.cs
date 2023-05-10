@@ -126,12 +126,21 @@ namespace QuanLyThuChi.DatabaseConfig
             }
         }
 
-        public bool DeleteKhoanThuChi(KhoanThuChi khoanThuChi)
+        public bool DeleteKhoanThuChi(Guid khoanThuChiId)
         {
             try
             {
-                db.Delete(khoanThuChi);
-                return true;
+                var khoanThuChi = db.Table<KhoanThuChi>().FirstOrDefault(k => k.Id == khoanThuChiId);
+
+                if (khoanThuChi != null)
+                {
+                    db.Delete(khoanThuChi);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             catch (SQLiteException ex)
             {
