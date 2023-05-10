@@ -14,6 +14,12 @@ namespace QuanLyThuChi.ViewModels
     public class DanhSachChiPageViewModel : ViewModelBase
     {
         public static DanhSachChiPageViewModel Instance { get; private set; }
+        private string _searchText;
+        public string SearchText
+        {
+            get { return _searchText; }
+            set { SetProperty(ref _searchText, value, nameof(SearchText)); }
+        }
         private double _totalCost;
         public double TotalCost
         {
@@ -33,6 +39,7 @@ namespace QuanLyThuChi.ViewModels
             get { return _listKhoanChi; }
             set { SetProperty(ref _listKhoanChi, value); }
         }
+        private ObservableCollection<KhoanThuChi> ListKhoanChiOld;
 
         public DanhSachChiPageViewModel(INavigationService navigationService)
             : base(navigationService)
@@ -40,6 +47,26 @@ namespace QuanLyThuChi.ViewModels
             GetKhoanChi();
             Instance = this;
             PropertyChanged += DanhSachChi_PropertyChanged;
+            PropertyChanged += OnPropertyChanged;
+        }
+
+        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(SearchText))
+            {
+                if (SearchText != null)
+                {
+                    ListKhoanChi.Clear();
+                    foreach (var khoanChi in ListKhoanChiOld)
+                    {
+                        if (khoanChi.Date.ToString("dd/MM").Contains(SearchText)
+                            || khoanChi.Title.ToLower().Contains(SearchText))
+                        {
+                            ListKhoanChi.Add(khoanChi);
+                        }
+                    }
+                }
+            }
         }
 
         private async void DanhSachChi_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -67,7 +94,15 @@ namespace QuanLyThuChi.ViewModels
         public void GetKhoanChi()
         {
             ListKhoanChi = new ObservableCollection<KhoanThuChi>(database.GetAllKhoanThuChiByCategory(Enums.Category.CHI));
+            ListKhoanChiOld = new ObservableCollection<KhoanThuChi>(ListKhoanChi);
             CalculateTotalCost();
+        }
+
+        public override void Destroy()
+        {
+            PropertyChanged -= OnPropertyChanged;
+            PropertyChanged -= DanhSachChi_PropertyChanged;
+            base.Destroy();
         }
     }
 }
