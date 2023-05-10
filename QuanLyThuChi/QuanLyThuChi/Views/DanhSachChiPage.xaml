@@ -3,8 +3,61 @@
     x:Class="QuanLyThuChi.Views.DanhSachChiPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cvt="clr-namespace:QuanLyThuChi.Converters"
     xmlns:prism="http://prismlibrary.com"
     xmlns:views="clr-namespace:QuanLyThuChi.Views"
-    prism:ViewModelLocator.AutowireViewModel="True">
-    <Label Text="Chi" />
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="#EAEAEA">
+    <ContentPage.Resources>
+        <cvt:KhoanChiConverter x:Key="khoanChiConverter" />
+        <cvt:DateToDayMonthConverter x:Key="dateToDayMonthConverter" />
+    </ContentPage.Resources>
+    <StackLayout Margin="0,0,0,5" BackgroundColor="White">
+        <CollectionView
+            Margin="5"
+            ItemsSource="{Binding ListKhoanChi}"
+            SelectionMode="Single">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="1" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Style="{StaticResource DateFormat}" Text="{Binding Date, Converter={StaticResource dateToDayMonthConverter}}" />
+                        <Label
+                            Grid.Row="1"
+                            Style="{StaticResource TitleFormat}"
+                            Text="{Binding Title}" />
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Style="{StaticResource CostChiFormat}"
+                            Text="{Binding Cost, Converter={StaticResource khoanChiConverter}}" />
+                        <BoxView
+                            Grid.Row="2"
+                            Grid.ColumnSpan="2"
+                            Style="{StaticResource Separator}" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <StackLayout
+            Margin="0,0,0,10"
+            HorizontalOptions="EndAndExpand"
+            Orientation="Horizontal">
+            <Label
+                FontAttributes="Bold"
+                FontSize="Small"
+                Text="Tổng cộng: "
+                TextColor="Black" />
+            <Label Style="{StaticResource CostChiFormat}" Text="{Binding TotalCost, Converter={StaticResource khoanChiConverter}}" />
+        </StackLayout>
+    </StackLayout>
 </views:BasePage>
