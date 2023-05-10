@@ -1,5 +1,7 @@
-﻿using System;
+﻿using QuanLyThuChi.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using Xamarin.Forms;
 
@@ -11,5 +13,19 @@ namespace QuanLyThuChi.Views
         {
             NavigationPage.SetHasNavigationBar(this, false);
         }
+
+        //protected override void OnAppearing()
+        //{
+        //    base.OnAppearing();
+        //    try
+        //    {
+        //        //var viewModel = (ViewModelBase)BindingContext;
+        //        //viewModel?.OnAppearing();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Debug.WriteLine(e);
+        //    }
+        //}
     }
 }

@@ -13,6 +13,7 @@ namespace QuanLyThuChi.ViewModels
 {
     public class DanhSachThuPageViewModel : ViewModelBase
     {
+        public static DanhSachThuPageViewModel Instance { get; private set; }
         private double _totalCost;
         public double TotalCost
         {
@@ -26,11 +27,12 @@ namespace QuanLyThuChi.ViewModels
             get { return _listKhoanThu; }
             set { SetProperty(ref _listKhoanThu, value); }
         }
+
         public DanhSachThuPageViewModel(INavigationService navigationService)
             : base(navigationService)
         {
             GetKhoanThu();
-            CalculateTotalCost();
+            Instance = this;
         }
 
         private void CalculateTotalCost()
@@ -42,9 +44,10 @@ namespace QuanLyThuChi.ViewModels
             }
         }
 
-        private void GetKhoanThu()
+        public void GetKhoanThu()
         {
             ListKhoanThu = new ObservableCollection<KhoanThuChi>(database.GetAllKhoanThuChiByCategory(Enums.Category.THU));
+            CalculateTotalCost();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using QuanLyThuChi.ViewModels;
+using Xamarin.Forms;
 
 namespace QuanLyThuChi.Views
 {
@@ -7,6 +8,12 @@ namespace QuanLyThuChi.Views
         public DanhSachChiPage()
         {
             InitializeComponent();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            DanhSachChiPageViewModel.Instance.GetKhoanChi();
         }
     }
 }

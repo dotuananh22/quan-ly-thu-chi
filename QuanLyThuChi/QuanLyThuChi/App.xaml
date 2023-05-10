@@ -42,33 +42,23 @@
             </Style>
             <Style TargetType="Entry">
                 <Setter Property="FontFamily" Value="{StaticResource RobotoFontRegular}" />
-                <Setter Property="FontSize"
-                        Value="Small" />
-                <Setter Property="VerticalTextAlignment"
-                        Value="End" />
+                <Setter Property="FontSize" Value="Small" />
+                <Setter Property="VerticalTextAlignment" Value="End" />
             </Style>
             <Style TargetType="Editor">
                 <Setter Property="FontFamily" Value="{StaticResource RobotoFontRegular}" />
-                <Setter Property="FontSize"
-                        Value="Small" />
-                <Setter Property="VerticalOptions"
-                        Value="End" />
-                <Setter Property="HeightRequest"
-                        Value="70" />
+                <Setter Property="FontSize" Value="Small" />
+                <Setter Property="VerticalOptions" Value="End" />
             </Style>
             <Style TargetType="Picker">
                 <Setter Property="FontFamily" Value="{StaticResource RobotoFontRegular}" />
-                <Setter Property="FontSize"
-                        Value="Small" />
-                <Setter Property="VerticalTextAlignment"
-                        Value="End" />
+                <Setter Property="FontSize" Value="Small" />
+                <Setter Property="VerticalTextAlignment" Value="End" />
             </Style>
             <Style TargetType="DatePicker">
                 <Setter Property="FontFamily" Value="{StaticResource RobotoFontRegular}" />
-                <Setter Property="FontSize"
-                        Value="Small" />
-                <Setter Property="VerticalOptions"
-                        Value="End" />
+                <Setter Property="FontSize" Value="Small" />
+                <Setter Property="VerticalOptions" Value="End" />
             </Style>
             <Style TargetType="TimePicker">
                 <Setter Property="FontFamily" Value="{StaticResource RobotoFontRegular}" />

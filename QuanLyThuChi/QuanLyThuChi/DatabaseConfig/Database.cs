@@ -45,7 +45,9 @@ namespace QuanLyThuChi.DatabaseConfig
         {
             try
             {
-                List<KhoanThuChi> ListKhoanThuChi = db.Table<KhoanThuChi>().ToList();
+                List<KhoanThuChi> ListKhoanThuChi = db.Table<KhoanThuChi>()
+                    .OrderBy(khoanThuChi => khoanThuChi.Date)
+                    .ToList();
                 return ListKhoanThuChi;
             }
             catch (SQLiteException ex)
@@ -62,6 +64,7 @@ namespace QuanLyThuChi.DatabaseConfig
             {
                 List<KhoanThuChi> ListKhoanThuChi = db.Table<KhoanThuChi>()
                     .Where(khoanThuChi => khoanThuChi.Category == category)
+                    .OrderBy(khoanThuChi => khoanThuChi.Date)
                     .ToList();
                 return ListKhoanThuChi;
             }

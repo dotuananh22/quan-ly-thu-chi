@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using Xamarin.Forms;
 
 namespace QuanLyThuChi.ViewModels
 {
@@ -25,6 +26,13 @@ namespace QuanLyThuChi.ViewModels
         public DateTime DateSelected
         {
             get { return _dateSelected; }
+            set { SetProperty(ref _dateSelected, value); }
+        }
+        private DateTime _maxDate = DateTime.Now;
+
+        public DateTime MaxDate
+        {
+            get { return _maxDate; }
             set { SetProperty(ref _dateSelected, value); }
         }
         private string _mainTitle;
@@ -71,25 +79,32 @@ namespace QuanLyThuChi.ViewModels
 
         private void OnOKBtnClick()
         {
-            var result = database.CreateKhoanThuChi(new KhoanThuChi
+            if (CategorySelected != null && MainTitle != "" && Cost != 0)
             {
-                Category = CategorySelected == "THU" ? Category.THU : Category.CHI,
-                Title = MainTitle,
-                Comment = Comment,
-                Date = DateSelected,
-                //Image = "https://images2.thanhnien.vn/Uploaded/maiphuong/2022_08_11/xo-so-tran-ngoc-1352.jpg",
-                Cost = Cost,
-            });
+                var result = database.CreateKhoanThuChi(new KhoanThuChi
+                {
+                    Category = CategorySelected == "THU" ? Category.THU : Category.CHI,
+                    Title = MainTitle,
+                    Comment = Comment,
+                    Date = DateSelected,
+                    //Image = "https://images2.thanhnien.vn/Uploaded/maiphuong/2022_08_11/xo-so-tran-ngoc-1352.jpg",
+                    Cost = Cost,
+                });
 
-            if (result)
-            {
-                Debug.WriteLine("Successfully");
+                if (result)
+                {
+                    DependencyService.Get<Toast>().Show("Thêm thành công");
+                }
+                else
+                {
+                    DependencyService.Get<Toast>().Show("Thêm thất bại");
+                }
+                ClearData();
             }
             else
             {
-                Debug.WriteLine("Failed");
+                DependencyService.Get<Toast>().Show("Vui lòng nhập đầy đủ thông tin!");
             }
-            ClearData();
         }
 
         private void ClearData()
