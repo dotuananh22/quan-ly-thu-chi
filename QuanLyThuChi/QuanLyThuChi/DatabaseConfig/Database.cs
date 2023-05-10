@@ -92,7 +92,7 @@ namespace QuanLyThuChi.DatabaseConfig
             }
         }
 
-        public KhoanThuChi GetKhoanThuChiById(int khoanThuChiId)
+        public KhoanThuChi GetKhoanThuChiById(Guid khoanThuChiId)
         {
             try
             {
