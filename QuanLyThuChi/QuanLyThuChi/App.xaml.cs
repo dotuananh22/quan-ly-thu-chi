@@ -58,7 +58,7 @@ namespace QuanLyThuChi
                 Comment = "Mua đồ ăn vặt Mua đồ ăn vặt Mua đồ ăn vặt Mua đồ ăn vặt",
                 Date = new DateTime(2023, 5, 4),
                 Image = "https://cdn.tgdd.vn/Files/2020/12/16/1314124/thuc-an-nhanh-la-gi-an-thuc-an-nhanh-co-tot-hay-khong-202201201405201587.jpg",
-                Cost = 1100000,
+                Cost = -1100000,
             });
             database.CreateKhoanThuChi(new KhoanThuChi
             {
@@ -67,7 +67,7 @@ namespace QuanLyThuChi
                 Comment = "Mua đồ ăn part 2",
                 Date = new DateTime(2023, 5, 8),
                 Image = "https://cdn.tgdd.vn/Files/2020/12/16/1314124/thuc-an-nhanh-la-gi-an-thuc-an-nhanh-co-tot-hay-khong-202201201405201587.jpg",
-                Cost = 1200000,
+                Cost = -1200000,
             });
             database.CreateKhoanThuChi(new KhoanThuChi
             {
@@ -76,7 +76,7 @@ namespace QuanLyThuChi
                 Comment = "Mua sách",
                 Date = new DateTime(2023, 5, 10),
                 Image = "https://lzd-img-global.slatic.net/g/p/7220e9ad826bf262581f6d8567590a4a.jpg_720x720q80.jpg",
-                Cost = 200000,
+                Cost = -200000,
             });
         }
 

@@ -3,8 +3,56 @@
     x:Class="QuanLyThuChi.Views.SearchPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cvt="clr-namespace:QuanLyThuChi.Converters"
     xmlns:prism="http://prismlibrary.com"
     xmlns:views="clr-namespace:QuanLyThuChi.Views"
-    prism:ViewModelLocator.AutowireViewModel="True">
-    <Label Text="Search page" />
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="#EAEAEA">
+    <ContentPage.Resources>
+        <cvt:KhoanThuChiConverter x:Key="khoanThuChiConverter" />
+        <cvt:DateToDayMonthConverter x:Key="dateToDayMonthConverter" />
+    </ContentPage.Resources>
+    <StackLayout Margin="0,0,0,5" BackgroundColor="White">
+        <StackLayout Style="{StaticResource HeaderLayoutStackLayout}">
+            <Label Style="{StaticResource HeaderLayoutLabel}" Text="Tìm kiếm khoản thu/chi" />
+        </StackLayout>
+        <SearchBar Style="{StaticResource SearchBar}" Text="{Binding SearchText, Mode=TwoWay}" />
+        <CollectionView
+            Margin="5"
+            ItemsSource="{Binding ListKhoanThuChi}"
+            SelectedItem="{Binding KhoanThuChi}"
+            SelectionMode="Single">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="1" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Style="{StaticResource DateFormat}" Text="{Binding Date, Converter={StaticResource dateToDayMonthConverter}}" />
+                        <Label
+                            Grid.Row="1"
+                            Style="{StaticResource TitleFormat}"
+                            Text="{Binding Title}" />
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Style="{StaticResource CostThuFormat}"
+                            Text="{Binding Cost, Converter={StaticResource khoanThuChiConverter}}"
+                            TextColor="{Binding ColorString}" />
+                        <BoxView
+                            Grid.Row="2"
+                            Grid.ColumnSpan="2"
+                            Style="{StaticResource Separator}" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
 </views:BasePage>

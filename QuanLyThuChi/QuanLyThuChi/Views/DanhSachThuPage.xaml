@@ -9,7 +9,7 @@
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="#EAEAEA">
     <ContentPage.Resources>
-        <cvt:KhoanThuConverter x:Key="khoanThuConverter" />
+        <cvt:KhoanThuChiConverter x:Key="khoanThuChiConverter" />
         <cvt:DateToDayMonthConverter x:Key="dateToDayMonthConverter" />
     </ContentPage.Resources>
     <StackLayout Margin="0,0,0,5" BackgroundColor="White">
@@ -41,7 +41,7 @@
                             Grid.Row="1"
                             Grid.Column="1"
                             Style="{StaticResource CostThuFormat}"
-                            Text="{Binding Cost, Converter={StaticResource khoanThuConverter}}" />
+                            Text="{Binding Cost, Converter={StaticResource khoanThuChiConverter}}" />
                         <BoxView
                             Grid.Row="2"
                             Grid.ColumnSpan="2"
@@ -60,7 +60,7 @@
                 FontSize="Small"
                 Text="Tổng cộng: "
                 TextColor="Black" />
-            <Label Style="{StaticResource CostThuFormat}" Text="{Binding TotalCost, Converter={StaticResource khoanThuConverter}}" />
+            <Label Style="{StaticResource CostThuFormat}" Text="{Binding TotalCost, Converter={StaticResource khoanThuChiConverter}}" />
         </StackLayout>
     </StackLayout>
 </views:BasePage>

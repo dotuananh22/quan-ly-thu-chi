@@ -16,5 +16,7 @@ namespace QuanLyThuChi.Models
         public DateTime Date { get; set; }
         public string Image { get; set; }
         public double Cost { get; set; }
+        public string Color { get; set; }
+        public string ColorString => Color = Category == Category.THU ? "#169F00" : "#B12B00";
     }
 }

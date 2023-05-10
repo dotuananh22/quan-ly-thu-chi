@@ -6,13 +6,20 @@ using Xamarin.Forms;
 
 namespace QuanLyThuChi.Converters
 {
-    public class KhoanChiConverter : IValueConverter
+    public class KhoanThuChiConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is double number)
             {
-                return "- " + number.ToString("N0");
+                if (number >= 0)
+                {
+                    return "+ " + number.ToString("N0");
+                }
+                else
+                {
+                    return "- " + (-number).ToString("N0");
+                }
             }
             return value;
         }

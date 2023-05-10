@@ -84,7 +84,7 @@ namespace QuanLyThuChi.ViewModels
                     Comment = Comment,
                     Date = DateSelected,
                     //Image = "https://images2.thanhnien.vn/Uploaded/maiphuong/2022_08_11/xo-so-tran-ngoc-1352.jpg",
-                    Cost = Cost,
+                    Cost = CategorySelected == "THU" ? Cost : -Cost,
                 });
 
                 if (result)
@@ -127,7 +127,7 @@ namespace QuanLyThuChi.ViewModels
                 DateSelected = khoanThuChiById.Date;
                 MainTitle = khoanThuChiById.Title;
                 Comment = khoanThuChiById?.Comment;
-                Cost = khoanThuChiById.Cost;
+                Cost = khoanThuChiById.Cost >= 0 ? khoanThuChiById.Cost : -khoanThuChiById.Cost;
             }
         }
         private void SetDataToCategoryPicker()
