@@ -58,6 +58,29 @@ namespace QuanLyThuChi.DatabaseConfig
             }
         }
 
+        public double GetTotalCostKhoanThuChiByMonth(Category category, int month)
+        {
+            try
+            {
+                double totalCost = 0;
+                totalCost = db.Table<KhoanThuChi>().ToList()
+                    .Where(k => k.Category == category && k.Date.Month == month)
+                    .Sum(k => k.Cost);
+                return totalCost;
+            }
+            catch (NullReferenceException ex)
+            {
+                Debug.WriteLine("Exception: " + ex);
+                return 0;
+            }
+            catch (SQLiteException ex)
+            {
+                Debug.WriteLine("Exception: " + ex);
+                return 0;
+                throw;
+            }
+        }
+
         public List<KhoanThuChi> GetAllKhoanThuChiByCategory(Category category)
         {
             try
@@ -76,13 +99,34 @@ namespace QuanLyThuChi.DatabaseConfig
             }
         }
 
-        public List<KhoanThuChi> GetTop3KhoanThuChiByCategory(Category category)
+        public List<KhoanThuChi> GetTop3KhoanThuByMonth(int month)
         {
             try
             {
                 List<KhoanThuChi> ListKhoanThuChi = db.Table<KhoanThuChi>()
-                    .Where(khoanThuChi => khoanThuChi.Category == category)
+                    .ToList()
+                    .Where(khoanThuChi => khoanThuChi.Category == Category.THU && khoanThuChi.Date.Month == month)
                     .OrderByDescending(khoanThuChi => khoanThuChi.Cost)
+                    .Take(3)
+                    .ToList();
+                return ListKhoanThuChi;
+            }
+            catch (SQLiteException ex)
+            {
+                Debug.WriteLine("Exception: " + ex);
+                return null;
+                throw;
+            }
+        }
+
+        public List<KhoanThuChi> GetTop3KhoanChiByMonth(int month)
+        {
+            try
+            {
+                List<KhoanThuChi> ListKhoanThuChi = db.Table<KhoanThuChi>()
+                    .ToList()
+                    .Where(khoanThuChi => khoanThuChi.Category == Category.CHI && khoanThuChi.Date.Month == month)
+                    .OrderBy(khoanThuChi => khoanThuChi.Cost)
                     .Take(3)
                     .ToList();
                 return ListKhoanThuChi;
