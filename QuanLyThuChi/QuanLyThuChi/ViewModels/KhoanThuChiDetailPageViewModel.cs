@@ -74,10 +74,13 @@ namespace QuanLyThuChi.ViewModels
             UpdateBtnCommand = new DelegateCommand(OnUpdateBtnCommand);
         }
 
-        private void OnDeleteBtnCommand()
+        private async void OnDeleteBtnCommand()
         {
-            
-            HandleDelete();
+            var alert = await _dialogService.DisplayAlertAsync("Thông báo", "Bạn có chắc chắn muốn xóa không?", "OK", "Hủy");
+            if (alert)
+            {
+                HandleDelete();
+            }
         }
 
         private async void OnUpdateBtnCommand()
@@ -89,20 +92,16 @@ namespace QuanLyThuChi.ViewModels
 
         private async void HandleDelete()
         {
-            var alert = await _dialogService.DisplayAlertAsync("Thông báo", "Bạn có chắc chắn muốn xóa không?", "OK", "Hủy");
-            if (alert)
+            var result = database.DeleteKhoanThuChi(KhoanThuChiId);
+            if (result)
             {
-                var result = database.DeleteKhoanThuChi(KhoanThuChiId);
-                if (result)
-                {
-                    DependencyService.Get<Toast>().Show("Xóa thành công");
-                }
-                else
-                {
-                    DependencyService.Get<Toast>().Show("Xóa thất bại");
-                }
-                await NavigationService.GoBackAsync();
+                DependencyService.Get<Toast>().Show("Xóa thành công");
             }
+            else
+            {
+                DependencyService.Get<Toast>().Show("Xóa thất bại");
+            }
+            await NavigationService.GoBackAsync();
         }
 
         private async void HandleBack()

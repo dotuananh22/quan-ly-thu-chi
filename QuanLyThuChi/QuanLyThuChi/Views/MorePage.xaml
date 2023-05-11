@@ -6,5 +6,47 @@
     xmlns:prism="http://prismlibrary.com"
     xmlns:views="clr-namespace:QuanLyThuChi.Views"
     prism:ViewModelLocator.AutowireViewModel="True">
-    <Label Text="More page" />
+    <StackLayout Margin="0,0,0,5" BackgroundColor="#EAEAEA">
+        <StackLayout Style="{StaticResource HeaderLayoutStackLayout}">
+            <Label Style="{StaticResource HeaderLayoutLabel}" Text="Khác" />
+        </StackLayout>
+        <Grid Margin="5,0,5,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <StackLayout Style="{StaticResource StackLayoutMore}">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding HomeTapCommand}" />
+                </StackLayout.GestureRecognizers>
+                <Image Source="home.png" Style="{StaticResource ImageMore}" />
+                <Label Style="{StaticResource LabelMore}" Text="{StaticResource Home}" />
+            </StackLayout>
+            <StackLayout Grid.Column="1" Style="{StaticResource StackLayoutMore}">
+                <Image Source="search.png" Style="{StaticResource ImageMore}" />
+                <Label Style="{StaticResource LabelMore}" Text="{StaticResource Search}" />
+            </StackLayout>
+            <StackLayout Grid.Column="2" Style="{StaticResource StackLayoutMore}">
+                <Image Source="graph.png" Style="{StaticResource ImageMore}" />
+                <Label Style="{StaticResource LabelMore}" Text="{StaticResource Chart}" />
+            </StackLayout>
+            <StackLayout Grid.Row="1" Style="{StaticResource StackLayoutMore}">
+                <Image Source="add_more.png" Style="{StaticResource ImageMore}" />
+                <Label Style="{StaticResource LabelMore}" Text="{StaticResource Add}" />
+            </StackLayout>
+            <StackLayout
+                Grid.Row="1"
+                Grid.Column="1"
+                Style="{StaticResource StackLayoutMore}">
+                <Image Source="language.png" Style="{StaticResource ImageMore}" />
+                <Label Style="{StaticResource LabelMore}" Text="{StaticResource Language}" />
+            </StackLayout>
+        </Grid>
+    </StackLayout>
 </views:BasePage>
