@@ -1,6 +1,9 @@
-﻿using Prism.Commands;
+﻿using Plugin.Media;
+using Plugin.Media.Abstractions;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
+using Prism.Services;
 using QuanLyThuChi.DatabaseConfig;
 using QuanLyThuChi.Enums;
 using QuanLyThuChi.Models;
@@ -8,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using Xamarin.Forms;
 
@@ -64,16 +68,51 @@ namespace QuanLyThuChi.ViewModels
 
         public DelegateCommand CancelBtnCommand { get; set; }
         public DelegateCommand UpdateBtnCommand { get; set; }
-        public UpdatePageViewModel(INavigationService navigationService)
+        private readonly IPageDialogService _dialogService;
+        private ImageSource _selectedImage;
+        public ImageSource SelectedImage
+        {
+            get => _selectedImage;
+            set => SetProperty(ref _selectedImage, value);
+        }
+        private byte[] ImageOdd;
+        public DelegateCommand SelectImageCommand { get; }
+        private MediaFile file;
+        public UpdatePageViewModel(INavigationService navigationService, IPageDialogService dialogService)
             : base(navigationService)
         {
             CancelBtnCommand = new DelegateCommand(OnCancelBtnClick);
             UpdateBtnCommand = new DelegateCommand(OnUpdateBtnClick);
             SetDataToCategoryPicker();
+            _dialogService = dialogService;
+            SelectImageCommand = new DelegateCommand(SelectImageAsync);
+        }
+
+        private async void SelectImageAsync()
+        {
+            // Check if the device has a camera
+            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+            {
+                await _dialogService.DisplayAlertAsync("No Camera", ":( No camera available.", "OK");
+                return;
+            }
+
+            // Prompt the user to select an image or take a photo
+            file = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions
+            {
+                PhotoSize = PhotoSize.Medium
+            });
+
+            if (file == null)
+                return;
+
+            // Display the selected image in an Image control
+            SelectedImage = ImageSource.FromFile(file.Path);
         }
 
         private async void OnUpdateBtnClick()
         {
+            var imageBytes = file != null ? File.ReadAllBytes(file.Path) : ImageOdd;
             if (CategorySelected != null && MainTitle != "" && Cost != 0)
             {
                 var result = database.UpdateKhoanThuChi(new KhoanThuChi
@@ -83,7 +122,7 @@ namespace QuanLyThuChi.ViewModels
                     Title = MainTitle,
                     Comment = Comment,
                     Date = DateSelected,
-                    //Image = "https://images2.thanhnien.vn/Uploaded/maiphuong/2022_08_11/xo-so-tran-ngoc-1352.jpg",
+                    Image = imageBytes,
                     Cost = CategorySelected == "THU" ? Cost : -Cost,
                 });
 
@@ -128,6 +167,9 @@ namespace QuanLyThuChi.ViewModels
                 MainTitle = khoanThuChiById.Title;
                 Comment = khoanThuChiById?.Comment;
                 Cost = khoanThuChiById.Cost >= 0 ? khoanThuChiById.Cost : -khoanThuChiById.Cost;
+                var imageSource = ImageSource.FromStream(() => new MemoryStream(khoanThuChiById.Image));
+                SelectedImage = imageSource;
+                ImageOdd = khoanThuChiById.Image;
             }
         }
         private void SetDataToCategoryPicker()

@@ -1,6 +1,10 @@
-﻿using Prism.Commands;
+﻿using Plugin.Media.Abstractions;
+using Plugin.Media;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
+using Prism.Services;
+using Prism.Services.Dialogs;
 using QuanLyThuChi.DatabaseConfig;
 using QuanLyThuChi.Enums;
 using QuanLyThuChi.Models;
@@ -10,6 +14,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using Xamarin.Forms;
+using System.IO;
 
 namespace QuanLyThuChi.ViewModels
 {
@@ -62,11 +67,45 @@ namespace QuanLyThuChi.ViewModels
 
         public DelegateCommand CancelBtnCommand { get; set; }
         public DelegateCommand OKBtnCommand { get; set; }
-        public AddPageViewModel(INavigationService navigationService)
+
+        private readonly IPageDialogService _dialogService;
+        private ImageSource _selectedImage;
+        public ImageSource SelectedImage
+        {
+            get => _selectedImage;
+            set => SetProperty(ref _selectedImage, value);
+        }
+        public DelegateCommand SelectImageCommand { get; }
+        private MediaFile file;
+        public AddPageViewModel(INavigationService navigationService, IPageDialogService dialogService)
             : base(navigationService)
         {
             SetData();
             ClearData();
+            _dialogService = dialogService;
+            SelectImageCommand = new DelegateCommand(SelectImageAsync);
+        }
+
+        private async void SelectImageAsync()
+        {
+            // Check if the device has a camera
+            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+            {
+                await _dialogService.DisplayAlertAsync("No Camera", "No camera available.", "OK");
+                return;
+            }
+
+            // Prompt the user to select an image or take a photo
+            file = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions
+            {
+                PhotoSize = PhotoSize.Medium
+            });
+
+            if (file == null)
+                return;
+
+            // Display the selected image in an Image control
+            SelectedImage = ImageSource.FromFile(file.Path);
         }
 
         private void SetData()
@@ -81,13 +120,14 @@ namespace QuanLyThuChi.ViewModels
         {
             if (CategorySelected != null && MainTitle != "" && Cost != 0)
             {
+                var imageBytes = file != null ? File.ReadAllBytes(file.Path) : null;
                 var result = database.CreateKhoanThuChi(new KhoanThuChi
                 {
                     Category = CategorySelected == "THU" ? Category.THU : Category.CHI,
                     Title = MainTitle,
                     Comment = Comment,
                     Date = DateSelected,
-                    //Image = "https://images2.thanhnien.vn/Uploaded/maiphuong/2022_08_11/xo-so-tran-ngoc-1352.jpg",
+                    Image = imageBytes,
                     Cost = CategorySelected == "THU" ? Cost : -Cost,
                 });
 

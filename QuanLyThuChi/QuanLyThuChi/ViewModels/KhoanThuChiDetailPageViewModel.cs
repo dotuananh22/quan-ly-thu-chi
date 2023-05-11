@@ -1,6 +1,7 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
+using Prism.Services;
 using QuanLyThuChi.DatabaseConfig;
 using QuanLyThuChi.Enums;
 using QuanLyThuChi.Models;
@@ -8,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using Xamarin.Forms;
 
@@ -53,12 +55,20 @@ namespace QuanLyThuChi.ViewModels
             get { return _comment; }
             set { SetProperty(ref _comment, value); }
         }
+        private ImageSource _image;
+        public ImageSource Image
+        {
+            get { return _image; }
+            set { SetProperty(ref _image, value); }
+        }
         public DelegateCommand BackCommand { get; set; }
         public DelegateCommand DeleteBtnCommand { get; set; }
         public DelegateCommand UpdateBtnCommand { get; set; }
-        public KhoanThuChiDetailPageViewModel(INavigationService navigationService)
+        private readonly IPageDialogService _dialogService;
+        public KhoanThuChiDetailPageViewModel(INavigationService navigationService, IPageDialogService dialogService)
             : base(navigationService)
         {
+            _dialogService = dialogService;
             BackCommand = new DelegateCommand(HandleBack);
             DeleteBtnCommand = new DelegateCommand(OnDeleteBtnCommand);
             UpdateBtnCommand = new DelegateCommand(OnUpdateBtnCommand);
@@ -79,16 +89,20 @@ namespace QuanLyThuChi.ViewModels
 
         private async void HandleDelete()
         {
-            var result = database.DeleteKhoanThuChi(KhoanThuChiId);
-            if (result)
+            var alert = await _dialogService.DisplayAlertAsync("Thông báo", "Bạn có chắc chắn muốn xóa không?", "OK", "Hủy");
+            if (alert)
             {
-                DependencyService.Get<Toast>().Show("Xóa thành công");
+                var result = database.DeleteKhoanThuChi(KhoanThuChiId);
+                if (result)
+                {
+                    DependencyService.Get<Toast>().Show("Xóa thành công");
+                }
+                else
+                {
+                    DependencyService.Get<Toast>().Show("Xóa thất bại");
+                }
+                await NavigationService.GoBackAsync();
             }
-            else
-            {
-                DependencyService.Get<Toast>().Show("Xóa thất bại");
-            }
-            await NavigationService.GoBackAsync();
         }
 
         private async void HandleBack()
@@ -116,6 +130,8 @@ namespace QuanLyThuChi.ViewModels
                 MainTitle = KhoanThu.Title;
                 Comment = KhoanThu.Comment;
                 Cost = KhoanThu.Cost;
+                var imageSource = ImageSource.FromStream(() => new MemoryStream(KhoanThu.Image));
+                Image = imageSource;
             }
         }
     }

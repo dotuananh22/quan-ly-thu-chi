@@ -13,11 +13,13 @@
         </StackLayout>
         <Grid Margin="5,20,10,0" VerticalOptions="StartAndExpand">
             <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
                 <RowDefinition Height="60" />
-                <RowDefinition Height="60" />
-                <RowDefinition Height="60" />
-                <RowDefinition Height="60" />
-                <RowDefinition Height="60" />
+                <RowDefinition Height="80" />
+                <RowDefinition Height="40" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -63,6 +65,19 @@
                 Grid.Row="4"
                 Grid.Column="1"
                 Text="{Binding Comment}" />
+            <Button
+                Grid.Row="6"
+                Margin="1,0,0,0"
+                BackgroundColor="White"
+                BorderColor="#EAEAEA"
+                BorderWidth="1"
+                Command="{Binding SelectImageCommand}"
+                Text="Hình ảnh" />
+            <Image
+                Grid.Row="5"
+                Grid.RowSpan="2"
+                Grid.Column="1"
+                Source="{Binding SelectedImage}" />
         </Grid>
         <Grid Margin="0,0,0,30" VerticalOptions="EndAndExpand">
             <Grid.ColumnDefinitions>
