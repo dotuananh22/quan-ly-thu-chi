@@ -71,6 +71,7 @@
             <x:String x:Key="Add">Thêm</x:String>
             <x:String x:Key="Chart">Thống kê</x:String>
             <x:String x:Key="Language">Ngôn ngữ</x:String>
+            <x:String x:Key="ChooseLanguage">Chọn ngôn ngữ</x:String>
             <x:String x:Key="More">Khác</x:String>
 
             <Style x:Key="HeaderLayoutStackLayout" TargetType="StackLayout">
@@ -175,7 +176,7 @@
             </Style>
             <Style x:Key="ImageMore" TargetType="Image">
                 <Setter Property="Margin" Value="20,20,20,10" />
-                <Setter Property="HeightRequest" Value="70" />
+                <Setter Property="HeightRequest" Value="50" />
                 <Setter Property="WidthRequest" Value="100" />
             </Style>
             <Style x:Key="LabelMore" TargetType="Label">

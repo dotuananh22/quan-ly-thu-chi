@@ -29,14 +29,23 @@
                 <Label Style="{StaticResource LabelMore}" Text="{StaticResource Home}" />
             </StackLayout>
             <StackLayout Grid.Column="1" Style="{StaticResource StackLayoutMore}">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SearchTapCommand}" />
+                </StackLayout.GestureRecognizers>
                 <Image Source="search.png" Style="{StaticResource ImageMore}" />
                 <Label Style="{StaticResource LabelMore}" Text="{StaticResource Search}" />
             </StackLayout>
             <StackLayout Grid.Column="2" Style="{StaticResource StackLayoutMore}">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ChartTapCommand}" />
+                </StackLayout.GestureRecognizers>
                 <Image Source="graph.png" Style="{StaticResource ImageMore}" />
                 <Label Style="{StaticResource LabelMore}" Text="{StaticResource Chart}" />
             </StackLayout>
             <StackLayout Grid.Row="1" Style="{StaticResource StackLayoutMore}">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding AddTapCommand}" />
+                </StackLayout.GestureRecognizers>
                 <Image Source="add_more.png" Style="{StaticResource ImageMore}" />
                 <Label Style="{StaticResource LabelMore}" Text="{StaticResource Add}" />
             </StackLayout>
@@ -44,6 +53,9 @@
                 Grid.Row="1"
                 Grid.Column="1"
                 Style="{StaticResource StackLayoutMore}">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding LanguageTapCommand}" />
+                </StackLayout.GestureRecognizers>
                 <Image Source="language.png" Style="{StaticResource ImageMore}" />
                 <Label Style="{StaticResource LabelMore}" Text="{StaticResource Language}" />
             </StackLayout>

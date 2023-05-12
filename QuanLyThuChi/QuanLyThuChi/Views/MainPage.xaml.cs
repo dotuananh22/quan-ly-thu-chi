@@ -1,4 +1,6 @@
 ﻿using QuanLyThuChi.Customs;
+using QuanLyThuChi.ViewModels;
+using System.Diagnostics;
 using Xamarin.Forms;
 
 namespace QuanLyThuChi.Views
@@ -10,12 +12,15 @@ namespace QuanLyThuChi.Views
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
-          
+            Instance = this;
         }
 
         public void SetPageIndex(int index)
         {
-            SelectedItem = index;
+            if (index < Children.Count)
+            {
+                CurrentPage = Children[index];
+            }
         }
     }
 }

@@ -97,6 +97,7 @@ namespace QuanLyThuChi
             containerRegistry.RegisterForNavigation<KhoanThuChiDetailPage, KhoanThuChiDetailPageViewModel>();
             containerRegistry.RegisterForNavigation<UpdatePage, UpdatePageViewModel>();
             containerRegistry.RegisterSingleton<IPageDialogService, PageDialogService>();
+            containerRegistry.RegisterForNavigation<LanguagePage, LanguagePageViewModel>();
         }
     }
 }

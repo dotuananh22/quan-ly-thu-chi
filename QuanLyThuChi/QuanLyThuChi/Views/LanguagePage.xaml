@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BasePage
+    x:Class="QuanLyThuChi.Views.LanguagePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+    xmlns:prism="http://prismlibrary.com"
+    xmlns:views="clr-namespace:QuanLyThuChi.Views"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="#EAEAEA">
+    <StackLayout Margin="0,0,0,5" BackgroundColor="White">
+        <StackLayout Style="{StaticResource HeaderLayoutStackLayout}">
+            <Image Source="back.png" Style="{StaticResource BackImage}">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BackCommand}" />
+                </Image.GestureRecognizers>
+            </Image>
+        </StackLayout>
+        <StackLayout Margin="10,10,0,0" Orientation="Horizontal">
+            <Label Text="{StaticResource ChooseLanguage}" Style="{StaticResource TitleFormat}" VerticalOptions="Center" Margin="0,5,0,0" />
+            <Picker
+                FontSize="Small"
+                HorizontalOptions="StartAndExpand"
+                ItemsSource="{Binding LanguagePicker}"
+                SelectedItem="{Binding LanguageSelected}"
+                WidthRequest="90">
+                <Picker.Behaviors>
+                    <b:EventToCommandBehavior Command="{Binding SelectedIndexChangedCommand}" EventName="SelectedIndexChanged" />
+                </Picker.Behaviors>
+            </Picker>
+        </StackLayout>
+    </StackLayout>
+</views:BasePage>
