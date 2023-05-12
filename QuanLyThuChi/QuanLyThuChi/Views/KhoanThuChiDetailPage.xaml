@@ -26,7 +26,7 @@
                 <RowDefinition Height="40" />
                 <RowDefinition Height="40" />
                 <RowDefinition Height="40" />
-                <RowDefinition Height="60" />
+                <RowDefinition Height="70" />
                 <RowDefinition Height="200" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -55,6 +55,8 @@
             <Label
                 Grid.Row="2"
                 Grid.Column="1"
+                LineBreakMode="TailTruncation"
+                MaxLines="1"
                 Style="{StaticResource MainTitleFormat}"
                 Text="{Binding MainTitle}" />
             <Label
@@ -69,18 +71,22 @@
             <Label
                 Grid.Row="4"
                 Style="{StaticResource MainTitleFormat}"
-                Text="Nội dung" />
+                Text="Nội dung"
+                VerticalOptions="CenterAndExpand" />
             <Label
                 Grid.Row="4"
                 Grid.Column="1"
+                LineBreakMode="TailTruncation"
+                MaxLines="3"
                 Style="{StaticResource MainTitleFormat}"
-                Text="{Binding Comment}" />
+                Text="{Binding Comment}"
+                VerticalOptions="CenterAndExpand" />
             <Image
                 Grid.Row="5"
                 Grid.ColumnSpan="2"
-                Source="{Binding Image}" 
+                HeightRequest="200"
                 HorizontalOptions="CenterAndExpand"
-                HeightRequest="200"/>
+                Source="{Binding Image}" />
         </Grid>
         <Grid Margin="0,0,0,30" VerticalOptions="EndAndExpand">
             <Grid.ColumnDefinitions>

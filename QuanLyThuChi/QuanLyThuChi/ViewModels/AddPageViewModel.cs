@@ -154,6 +154,7 @@ namespace QuanLyThuChi.ViewModels
             MainTitle = "";
             Cost = 0;
             Comment = "";
+            SelectedImage = null;
         }
 
         private void OnCancelBtnClick()

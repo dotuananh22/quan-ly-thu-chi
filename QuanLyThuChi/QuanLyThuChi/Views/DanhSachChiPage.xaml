@@ -41,7 +41,7 @@
                             Grid.Row="1"
                             Grid.Column="1"
                             Style="{StaticResource CostChiFormat}"
-                               Text="{Binding Cost, Converter={StaticResource khoanThuChiConverter}}" />
+                            Text="{Binding Cost, Converter={StaticResource khoanThuChiConverter}}" />
                         <BoxView
                             Grid.Row="2"
                             Grid.ColumnSpan="2"
@@ -49,6 +49,18 @@
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
+            <CollectionView.EmptyView>
+                <ContentView>
+                    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                        <Label
+                            Margin="10,25,10,10"
+                            HorizontalOptions="Fill"
+                            HorizontalTextAlignment="Center"
+                            Style="{StaticResource TitleFormat}"
+                            Text="Không có khoản chi." />
+                    </StackLayout>
+                </ContentView>
+            </CollectionView.EmptyView>
         </CollectionView>
         <StackLayout
             Margin="0,0,0,10"
@@ -60,8 +72,7 @@
                 FontSize="Small"
                 Text="Tổng cộng: "
                 TextColor="Black" />
-            <Label Style="{StaticResource CostChiFormat}"
-                   Text="{Binding TotalCost, Converter={StaticResource khoanThuChiConverter}}" />
+            <Label Style="{StaticResource CostChiFormat}" Text="{Binding TotalCost, Converter={StaticResource khoanThuChiConverter}}" />
         </StackLayout>
     </StackLayout>
 </views:BasePage>

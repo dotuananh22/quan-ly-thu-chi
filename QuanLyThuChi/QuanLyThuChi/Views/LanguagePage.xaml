@@ -17,12 +17,17 @@
             </Image>
         </StackLayout>
         <StackLayout Margin="10,10,0,0" Orientation="Horizontal">
-            <Label Text="{StaticResource ChooseLanguage}" Style="{StaticResource TitleFormat}" VerticalOptions="Center" Margin="0,5,0,0" />
+            <Label
+                Margin="0,5,0,0"
+                Style="{StaticResource TitleFormat}"
+                Text="{StaticResource ChooseLanguage}"
+                VerticalOptions="Center" />
             <Picker
                 FontSize="Small"
                 HorizontalOptions="StartAndExpand"
                 ItemsSource="{Binding LanguagePicker}"
                 SelectedItem="{Binding LanguageSelected}"
+                TextColor="Black"
                 WidthRequest="90">
                 <Picker.Behaviors>
                     <b:EventToCommandBehavior Command="{Binding SelectedIndexChangedCommand}" EventName="SelectedIndexChanged" />

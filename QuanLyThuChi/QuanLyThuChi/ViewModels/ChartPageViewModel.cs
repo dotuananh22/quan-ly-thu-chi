@@ -19,6 +19,7 @@ namespace QuanLyThuChi.ViewModels
     public class ChartPageViewModel : ViewModelBase
     {
         private readonly Database database = new Database();
+        public static ChartPageViewModel Instance { get; private set; }
         private bool _isVisible;
 
         public bool IsVisible
@@ -106,9 +107,15 @@ namespace QuanLyThuChi.ViewModels
             PropertyChanged += DanhSachThu_PropertyChanged;
             PropertyChanged += DanhSachChi_PropertyChanged;
             SetDataToMonthPicker();
+            InitData();
+            Instance = this;
+        }
+
+        public void InitData()
+        {
+            CreateChart();
             GetDataToChartByMonth(MonthSelected);
             SetDataToChart();
-            CreateChart();
             GetKhoanThu();
             GetKhoanChi();
             CheckData();
@@ -165,12 +172,7 @@ namespace QuanLyThuChi.ViewModels
 
         private void OnSelectedIndexChangedCommand()
         {
-            CreateChart();
-            GetDataToChartByMonth(MonthSelected);
-            SetDataToChart();
-            GetKhoanThu();
-            GetKhoanChi();
-            CheckData();
+            InitData();
         }
 
         private void SetDataToMonthPicker()

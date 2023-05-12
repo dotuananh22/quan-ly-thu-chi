@@ -9,5 +9,11 @@ namespace QuanLyThuChi.Views
         {
             InitializeComponent();
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ChartPageViewModel.Instance.InitData();
+        }
     }
 }

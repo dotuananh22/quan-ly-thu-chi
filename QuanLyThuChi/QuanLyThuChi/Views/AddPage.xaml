@@ -17,7 +17,7 @@
                 <RowDefinition Height="40" />
                 <RowDefinition Height="40" />
                 <RowDefinition Height="40" />
-                <RowDefinition Height="60" />
+                <RowDefinition Height="70" />
                 <RowDefinition Height="80" />
                 <RowDefinition Height="40" />
             </Grid.RowDefinitions>
@@ -30,7 +30,8 @@
             <Picker
                 Grid.Column="1"
                 ItemsSource="{Binding CategoryPicker}"
-                SelectedItem="{Binding CategorySelected}" />
+                SelectedItem="{Binding CategorySelected}"
+                TextColor="Black" />
             <Label
                 Grid.Row="1"
                 Style="{StaticResource MainTitleFormat}"
@@ -39,7 +40,8 @@
                 Grid.Row="1"
                 Grid.Column="1"
                 Date="{Binding DateSelected}"
-                MaximumDate="{Binding MaxDate}" />
+                MaximumDate="{Binding MaxDate}"
+                TextColor="Black" />
             <Label
                 Grid.Row="2"
                 Style="{StaticResource MainTitleFormat}"
@@ -47,7 +49,9 @@
             <Entry
                 Grid.Row="2"
                 Grid.Column="1"
-                Text="{Binding MainTitle}" />
+                MaxLength="50"
+                Text="{Binding MainTitle}"
+                TextColor="Black" />
             <Label
                 Grid.Row="3"
                 Style="{StaticResource MainTitleFormat}"
@@ -56,15 +60,20 @@
                 Grid.Row="3"
                 Grid.Column="1"
                 Keyboard="Numeric"
-                Text="{Binding Cost}" />
+                Text="{Binding Cost}"
+                TextColor="Black" />
             <Label
                 Grid.Row="4"
                 Style="{StaticResource MainTitleFormat}"
-                Text="Nội dung" />
+                Text="Nội dung"
+                VerticalOptions="CenterAndExpand" />
             <Editor
                 Grid.Row="4"
                 Grid.Column="1"
-                Text="{Binding Comment}" />
+                HeightRequest="70"
+                MaxLength="200"
+                Text="{Binding Comment}"
+                TextColor="Black" />
             <Button
                 Grid.Row="6"
                 Margin="1,0,0,0"
@@ -72,7 +81,8 @@
                 BorderColor="#EAEAEA"
                 BorderWidth="1"
                 Command="{Binding SelectImageCommand}"
-                Text="Hình ảnh" />
+                Text="Hình"
+                TextColor="Black" />
             <Image
                 Grid.Row="5"
                 Grid.RowSpan="2"

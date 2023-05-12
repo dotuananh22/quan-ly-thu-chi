@@ -49,6 +49,18 @@
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
+            <CollectionView.EmptyView>
+                <ContentView>
+                    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                        <Label
+                            Margin="10,25,10,10"
+                            HorizontalOptions="Fill"
+                            HorizontalTextAlignment="Center"
+                            Style="{StaticResource TitleFormat}"
+                            Text="Không có khoản thu." />
+                    </StackLayout>
+                </ContentView>
+            </CollectionView.EmptyView>
         </CollectionView>
         <StackLayout
             Margin="0,0,0,10"

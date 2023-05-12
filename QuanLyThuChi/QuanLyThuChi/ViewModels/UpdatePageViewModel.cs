@@ -134,7 +134,7 @@ namespace QuanLyThuChi.ViewModels
                 {
                     DependencyService.Get<Toast>().Show("Cập nhật thất bại");
                 }
-                await NavigationService.GoBackAsync();
+                await NavigationService.GoBackToRootAsync();
             }
             else
             {
