@@ -13,7 +13,7 @@ namespace QuanLyThuChi.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            DanhSachChiPageViewModel.Instance.GetKhoanChi();
+            DanhSachChiPageViewModel.Instance.InitData();
         }
     }
 }

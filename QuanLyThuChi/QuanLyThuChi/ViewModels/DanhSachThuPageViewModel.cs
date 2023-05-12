@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 
 namespace QuanLyThuChi.ViewModels
@@ -15,6 +16,20 @@ namespace QuanLyThuChi.ViewModels
     public class DanhSachThuPageViewModel : ViewModelBase
     {
         public static DanhSachThuPageViewModel Instance { get; private set; }
+        private List<string> _monthPicker;
+
+        public List<string> MonthPicker
+        {
+            get => _monthPicker;
+            set => SetProperty(ref _monthPicker, value);
+        }
+        private string _monthSelected;
+
+        public string MonthSelected
+        {
+            get => _monthSelected;
+            set => SetProperty(ref _monthSelected, value);
+        }
         private string _searchText;
         public string SearchText
         {
@@ -41,14 +56,37 @@ namespace QuanLyThuChi.ViewModels
             set { SetProperty(ref _listKhoanThu, value); }
         }
         private ObservableCollection<KhoanThuChi> ListKhoanThuOld;
+        public DelegateCommand SelectedIndexChangedCommand { get; private set; }
 
         public DanhSachThuPageViewModel(INavigationService navigationService)
             : base(navigationService)
         {
-            GetKhoanThu();
             Instance = this;
+            SetDataToMonthPicker();
+            SelectedIndexChangedCommand = new DelegateCommand(OnSelectedIndexChangedCommand);
             PropertyChanged += DanhSachThu_PropertyChanged;
             PropertyChanged += OnPropertyChanged;
+            InitData();
+        }
+        public void InitData()
+        {
+            GetKhoanThu();
+        }
+        private void OnSelectedIndexChangedCommand()
+        {
+            InitData();
+        }
+
+        private void SetDataToMonthPicker()
+        {
+            MonthPicker = new List<string>();
+            int year = DateTime.Now.Year; // The current year
+            string currentMonth = new DateTime(year, DateTime.Now.Month, 1).ToString("MMMM");
+            for (int i = 1; i <= 12; i++)
+            {
+                MonthPicker.Add(new DateTime(year, i, 1).ToString("MMMM"));
+            }
+            MonthSelected = currentMonth;
         }
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -92,9 +130,10 @@ namespace QuanLyThuChi.ViewModels
             }
         }
 
-        public void GetKhoanThu()
+        private void GetKhoanThu()
         {
-            ListKhoanThu = new ObservableCollection<KhoanThuChi>(database.GetAllKhoanThuChiByCategory(Enums.Category.THU));
+            DateTime date = DateTime.ParseExact(MonthSelected, "MMMM", CultureInfo.CurrentCulture);
+            ListKhoanThu = new ObservableCollection<KhoanThuChi>(database.GetAllKhoanThuChiByCategoryAndMonth(Enums.Category.THU, date.Month));
             ListKhoanThuOld = new ObservableCollection<KhoanThuChi>(ListKhoanThu);
             CalculateTotalCost();
         }

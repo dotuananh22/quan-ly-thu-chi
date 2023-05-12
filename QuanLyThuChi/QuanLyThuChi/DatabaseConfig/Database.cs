@@ -99,6 +99,25 @@ namespace QuanLyThuChi.DatabaseConfig
             }
         }
 
+        public List<KhoanThuChi> GetAllKhoanThuChiByCategoryAndMonth(Category category, int month)
+        {
+            try
+            {
+                List<KhoanThuChi> ListKhoanThuChi = db.Table<KhoanThuChi>()
+                    .ToList()
+                    .Where(khoanThuChi => khoanThuChi.Category == category && khoanThuChi.Date.Month == month)
+                    .OrderBy(khoanThuChi => khoanThuChi.Date)
+                    .ToList();
+                return ListKhoanThuChi;
+            }
+            catch (SQLiteException ex)
+            {
+                Debug.WriteLine("Exception: " + ex);
+                return null;
+                throw;
+            }
+        }
+
         public List<KhoanThuChi> GetTop3KhoanThuByMonth(int month)
         {
             try

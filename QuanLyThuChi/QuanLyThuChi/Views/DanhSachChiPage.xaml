@@ -3,6 +3,7 @@
     x:Class="QuanLyThuChi.Views.DanhSachChiPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
     xmlns:cvt="clr-namespace:QuanLyThuChi.Converters"
     xmlns:prism="http://prismlibrary.com"
     xmlns:views="clr-namespace:QuanLyThuChi.Views"
@@ -14,6 +15,18 @@
     </ContentPage.Resources>
     <StackLayout Margin="0,0,0,5" BackgroundColor="White">
         <SearchBar Style="{StaticResource SearchBar}" Text="{Binding SearchText, Mode=TwoWay}" />
+        <Picker
+            Margin="5,0,0,0"
+            FontSize="Small"
+            HorizontalOptions="StartAndExpand"
+            ItemsSource="{Binding MonthPicker}"
+            SelectedItem="{Binding MonthSelected}"
+            TextColor="Black"
+            WidthRequest="90">
+            <Picker.Behaviors>
+                <b:EventToCommandBehavior Command="{Binding SelectedIndexChangedCommand}" EventName="SelectedIndexChanged" />
+            </Picker.Behaviors>
+        </Picker>
         <CollectionView
             Margin="5"
             ItemsSource="{Binding ListKhoanChi}"
