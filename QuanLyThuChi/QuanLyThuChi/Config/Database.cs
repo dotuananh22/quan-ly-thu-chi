@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
-namespace QuanLyThuChi.DatabaseConfig
+namespace QuanLyThuChi.Config
 {
     class Database
     {

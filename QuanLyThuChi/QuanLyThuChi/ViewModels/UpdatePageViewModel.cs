@@ -4,7 +4,7 @@ using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
 using Prism.Services;
-using QuanLyThuChi.DatabaseConfig;
+using QuanLyThuChi.Config;
 using QuanLyThuChi.Enums;
 using QuanLyThuChi.Models;
 using System;

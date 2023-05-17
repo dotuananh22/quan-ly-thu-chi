@@ -4,6 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+    xmlns:config="clr-namespace:QuanLyThuChi.Config"
     xmlns:prism="http://prismlibrary.com"
     xmlns:views="clr-namespace:QuanLyThuChi.Views"
     prism:ViewModelLocator.AutowireViewModel="True"
@@ -25,13 +26,14 @@
             <Picker
                 FontSize="Small"
                 HorizontalOptions="StartAndExpand"
-                ItemsSource="{Binding LanguagePicker}"
-                SelectedItem="{Binding LanguageSelected}"
+                ItemDisplayBinding="{Binding DisplayName}"
+                ItemsSource="{Binding LanguageOptions}"
+                SelectedIndex="{Binding SelectedLanguageIndex}"
                 TextColor="Black"
                 WidthRequest="90">
-                <Picker.Behaviors>
+                <!--<Picker.Behaviors>
                     <b:EventToCommandBehavior Command="{Binding SelectedIndexChangedCommand}" EventName="SelectedIndexChanged" />
-                </Picker.Behaviors>
+                </Picker.Behaviors>-->
             </Picker>
         </StackLayout>
     </StackLayout>

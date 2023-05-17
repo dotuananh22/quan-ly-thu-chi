@@ -2,7 +2,7 @@
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
-using QuanLyThuChi.DatabaseConfig;
+using QuanLyThuChi.Config;
 using QuanLyThuChi.Models;
 using SkiaSharp;
 using System;

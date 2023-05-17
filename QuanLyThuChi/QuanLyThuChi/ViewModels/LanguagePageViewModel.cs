@@ -1,56 +1,79 @@
-﻿using Prism.Commands;
+﻿using Prism.AppModel;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
+using QuanLyThuChi.Config;
+using QuanLyThuChi.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
+using System.Resources;
+using System.Threading;
 
 namespace QuanLyThuChi.ViewModels
 {
     public class LanguagePageViewModel : ViewModelBase
     {
-        private List<string> _languagePicker;
+        private readonly LocalizationService _localizationService;
+        private int _selectedLanguageIndex;
 
-        public List<string> LanguagePicker
-        {
-            get => _languagePicker;
-            set => SetProperty(ref _languagePicker, value);
-        }
-        private string _languageSelected;
-
-        public string LanguageSelected
-        {
-            get => _languageSelected;
-            set => SetProperty(ref _languageSelected, value);
-        }
-        public DelegateCommand SelectedIndexChangedCommand { get; private set; }
         public DelegateCommand BackCommand { get; set; }
 
-        public LanguagePageViewModel(INavigationService navigationService)
+        public LanguagePageViewModel(INavigationService navigationService, LocalizationService localizationService)
             : base(navigationService)
         {
-            SelectedIndexChangedCommand = new DelegateCommand(OnSelectedIndexChangedCommand);
+            _localizationService = localizationService;
             BackCommand = new DelegateCommand(HandleBack);
-            LanguagePicker = new List<string>();
-            SetDataToLanguagePicker();
+
+            LanguageOptions = new List<LanguageOption>
+            {
+                new LanguageOption { DisplayName = "English", CultureInfo = new CultureInfo("en-US") },
+                new LanguageOption { DisplayName = "Vietnamese", CultureInfo = new CultureInfo("vi-VN") }
+            };
         }
+        public List<LanguageOption> LanguageOptions { get; }
+        public int SelectedLanguageIndex
+        {
+            get => _selectedLanguageIndex;
+            set
+            {
+                if (SetProperty(ref _selectedLanguageIndex, value))
+                {
+                    var selectedLanguage = LanguageOptions.ElementAtOrDefault(value);
+                    if (selectedLanguage != null)
+                    {
+                        CultureInfo.CurrentUICulture = selectedLanguage.CultureInfo;
+                        RaisePropertyChanged(nameof(LocalizedStrings));
+                    }
+                }
+            }
+        }
+        public dynamic LocalizedStrings => new
+        {
+            Title = _localizationService.GetString("Test"),
+        };
 
         private async void HandleBack()
         {
             await NavigationService.GoBackAsync();
         }
 
-        private void OnSelectedIndexChangedCommand()
-        {
-            Debug.WriteLine("Language: " + LanguageSelected);
-        }
+        //private void OnSelectedIndexChangedCommand()
+        //{
+        //    AppSettings.Language = LanguageSelected == LanguagePicker[0] ? "vi" : "en";
+        //    CultureInfo language = new CultureInfo(AppSettings.Language);
+        //    Thread.CurrentThread.CurrentUICulture = language;
+        //}
 
-        private void SetDataToLanguagePicker()
-        {
-            LanguagePicker.Add("Tiếng Việt");
-            LanguagePicker.Add("Tiếng Anh");
-            LanguageSelected = LanguagePicker[0];
-        }
+        //private void SetDataToLanguagePicker()
+        //{
+        //    LanguageOptions = new List<LanguageOption>
+        //    {
+        //        new LanguageOption { DisplayName = "English", CultureInfo = new CultureInfo("en-US") },
+        //        new LanguageOption { DisplayName = "Vietnamese", CultureInfo = new CultureInfo("vi-VN") }
+        //    };
+        //}
     }
 }
